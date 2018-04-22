@@ -37,7 +37,8 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"></a></li>
+                @auth
+                <li><a href="#">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -46,11 +47,16 @@
                         <li><a href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>
                         <li>
-                            <form action="" method="post">
+                            <form action="{{ route('logout') }}" method="post">
                                 <button class="btn btn-danger">注销</button>
+                                {{ method_field('delete') }}
+                                {{ csrf_field() }}
                             </form>
                         </li>
-                        <li><a href="">登录</a></li>
+                        @endauth
+                        @guest
+                        <li><a href="{{ route('login') }}">登录</a></li>
+                        @endguest
                     </ul>
                 </li>
             </ul>

@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => [ 'create', 'store']
+        ]);
+
+//        $this->middleware('guest', [
+//            'only' => ['create']
+//        ]);
+    }
     public function index()
     {
         $categories = Category::paginate(3);

@@ -19,7 +19,8 @@
                 <td>{{$business->is_review==0?'未通过':'通过'}}</td>
                 <td>
                     <a href="{{ route('businesses.edit',['business'=>$business]) }}" class="btn btn-sm btn-warning">编辑</a>
-                    <a href="{{ route('businesses.show',['business'=>$business]) }}" class="btn btn-sm btn-primary">审核</a>
+                    <a href="{{ route('businesses.show',['business'=>$business]) }}" class="btn btn-sm btn-primary">查看</a>
+                    @if($business->is_review==0)<a href="{{ route('review',['business'=>$business]) }}" class="btn btn-sm btn-primary">审核</a>@endif
                     <button class="btn btn-danger">删除</button>
                 </td>
             </tr>

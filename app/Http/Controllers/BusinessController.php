@@ -3,12 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Business;
+use App\Category;
+use App\Information;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class BusinessController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => [ 'create', 'store']
+        ]);
+
+//        $this->middleware('guest', [
+//            'only' => ['create']
+//        ]);
+    }
     public function index()
     {
        $businesses =  Business::paginate(3);
@@ -16,7 +30,8 @@ class BusinessController extends Controller
     }
     public function create()
     {
-        return view('businesses.create');
+        $categories = Category::all();
+        return view('businesses.create',compact('categories'));
         }
 
     public function store(Request $request)
@@ -42,18 +57,34 @@ class BusinessController extends Controller
             'phone.max'=>'电话号码不能超过12位',
             'phone.required'=>'电话号码不能为空',
             ]);
-        $fileName = $request->file('logo')->store('public/businesses');
-//        $img = Image::make($fileName)->resize(200, 200)->insert('public/businesses', 'bottom-right', 15, 10);
-//        $img->save('public/businesses');
-        Business::create(
-            [
-                'name'=>$request->name,
-                'logo'=>$fileName,
-                'phone'=>$request->phone,
-                'is_review'=>1,
-                'password'=>bcrypt($request->password),
-            ]
-        );
+        DB::transaction(function ()use($request){
+            $information_id = Information::create(
+                [
+                    'shop_name'=>$request->name,
+                    'brand'=>$request->brand,
+                    'bao'=>$request->bao,
+                    'on_time'=>$request->on_time,
+                    'zhun'=>$request->zhun,
+                    'fengniao'=>$request->fengniao,
+                    'piao'=>$request->piao,
+                ]);
+//        var_dump($information_id->id);die;
+            $fileName = $request->file('logo')->store('public/businesses');
+            $file = url(Storage::url($fileName));
+            Business::create(
+                [
+                    'name'=>$request->name,
+                    'logo'=>$file,
+                    'phone'=>$request->phone,
+                    'password'=>bcrypt($request->password),
+                    'categories_id'=>$request->categories_id,
+                    'information_id'=>$information_id->id,
+                    'is_review'=>1,
+                ]
+            );
+
+        });
+
         session()->flash('success','注册成功');
         return redirect()->route('businesses.index');
         }
@@ -96,12 +127,20 @@ class BusinessController extends Controller
 
     public function show(Business $business)
     {
-//        var_dump($business);die;
-        $is_review = 1;
+        $information_id = $business->information_id;
+//            var_dump($business->information_id);die;
+        $information = DB::table('information')->where('id','=',"$information_id")->get();
+//        var_dump($information);die;
+        return view('businesses.show',compact('information'));
+        }
+
+    public function review(Business $business)
+    {
+//        $review = 1;
         $business->update([
-            'is_review'=>$is_review,
+            'is_review'=>$business->is_review =1,
         ]);
-        session()->flash('success','审核成功');
+        session()->flash('success','审核通过');
         return redirect()->route('businesses.index');
         }
 }

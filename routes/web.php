@@ -18,3 +18,14 @@
 Route::resource('categories', 'CategoryController');
 
 Route::resource('businesses', 'BusinessController');
+Route::get('businesses/{business}/review', 'BusinessController@review')->name('review');
+
+Route::resource('information', 'InformationController');
+
+Route::resource('admins', 'AdminController');
+
+Route::get('login', 'SessionsController@create')->name('login');
+Route::post('login', 'SessionsController@store')->name('login');
+Route::delete('logout', 'SessionsController@destroy')->name('logout');
+
+Route::post('admins/{admin}/add_pass', 'AdminController@add_pass')->name('add_pass');
