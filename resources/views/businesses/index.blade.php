@@ -14,7 +14,7 @@
             <tr data-id="{{ $business->id }}">
                 <td>{{$business->id}}</td>
                 <td>{{$business->name}}</td>
-                <td><img src="{{ Storage::url($business->logo)}}" alt="" width="100px" height="100px"></td>
+                <td><img src="{{ $business->logo }}" alt="" width="100px" height="100px"></td>
                 <td>{{$business->phone}}</td>
                 <td>{{$business->is_review==0?'未通过':'通过'}}</td>
                 <td>

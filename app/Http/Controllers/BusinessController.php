@@ -18,10 +18,6 @@ class BusinessController extends Controller
         $this->middleware('auth', [
             'except' => [ 'create', 'store']
         ]);
-
-//        $this->middleware('guest', [
-//            'only' => ['create']
-//        ]);
     }
     public function index()
     {
