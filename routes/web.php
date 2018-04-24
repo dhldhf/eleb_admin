@@ -29,3 +29,5 @@ Route::post('login', 'SessionsController@store')->name('login');
 Route::delete('logout', 'SessionsController@destroy')->name('logout');
 
 Route::post('admins/{admin}/add_pass', 'AdminController@add_pass')->name('add_pass');
+
+Route::resource('activities', 'ActivityController');
