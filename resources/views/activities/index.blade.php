@@ -14,7 +14,6 @@
             <tr data-id="{{ $activity->id }}">
                 <td>{{$activity->id}}</td>
                 <td>{{ $activity->title }}</td>
-                <td>{!! mb_substr($activity->contents,0,20)!!}</td>
                 <td>{{date('Y-m-d',$activity->start_time)}}</td>
                 <td>{{date('Y-m-d',$activity->end_time)}}</td>
                 <td>

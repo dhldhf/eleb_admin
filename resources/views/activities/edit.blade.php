@@ -8,11 +8,11 @@
         </div>
         <div class="form-group">
             <label for="">活动开启时间</label>
-            <input type="date" class="form-control" name="start_time" value="{{ $activity->start_time }}">
+            <input type="date" class="form-control" name="start_time" value="{{ date('Y-m-d',$activity->start_time) }}">
         </div>
         <div class="form-group">
             <label for="">活动结束时间</label>
-            <input type="date" class="form-control" name="end_time" value="{{$activity->end_time}}">
+            <input type="date" class="form-control" name="end_time" value="{{date('Y-m-d',$activity->end_time)}}">
         </div>
         <div>
             <!-- 加载编辑器的容器 -->
