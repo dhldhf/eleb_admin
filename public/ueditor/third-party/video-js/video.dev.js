@@ -75,7 +75,7 @@ vjs.ACCESS_PROTOCOL = ('https:' == document.location.protocol ? 'https://' : 'ht
  * @type {Object}
  */
 vjs.options = {
-  // Default order of fallback technology
+  // Default orders of fallback technology
   'techOrder': ['html5','flash'],
   // techOrder: ['flash','html5'],
 
@@ -2137,7 +2137,7 @@ vjs.Component.prototype.emitTapEvents = function(){
     if (couldBeTap === true) {
       // Measure how long the touch lasted
       touchTime = new Date().getTime() - touchStart;
-      // The touch needs to be quick in order to consider it a tap
+      // The touch needs to be quick in orders to consider it a tap
       if (touchTime < 250) {
         this.trigger('tap');
         // It may be good to copy the touchend event object and change the
@@ -2711,7 +2711,7 @@ vjs.Player = vjs.Component.extend({
     // Set Options
     // The options argument overrides options set in the video tag
     // which overrides globally set options.
-    // This latter part coincides with the load order
+    // This latter part coincides with the load orders
     // (tag must exist before Player)
     options = vjs.obj.merge(this.getTagSettings(tag), options);
 
@@ -3599,7 +3599,7 @@ vjs.Player.prototype.exitFullWindow = function(){
 
 vjs.Player.prototype.selectSource = function(sources){
 
-  // Loop through each playback technology in the options order
+  // Loop through each playback technology in the options orders
   for (var i=0,j=this.options_['techOrder'];i<j.length;i++) {
     var techName = vjs.capitalize(j[i]),
         tech = window['videojs'][techName];
@@ -4010,7 +4010,7 @@ vjs.Player.prototype.listenForUserActivity = function(){
 
 // TODO
 // currentSrcList: the array of sources including other formats and bitrates
-// playList: array of source lists in order of playback
+// playList: array of source lists in orders of playback
 
 // RequestFullscreen API
 (function(){
@@ -4182,7 +4182,7 @@ vjs.DurationDisplay = vjs.Component.extend({
   init: function(player, options){
     vjs.Component.call(this, player, options);
 
-    player.on('timeupdate', vjs.bind(this, this.updateContent)); // this might need to be changes to 'durationchange' instead of 'timeupdate' eventually, however the durationchange event fires before this.player_.duration() is set, so the value cannot be written out using this method. Once the order of durationchange and this.player_.duration() being set is figured out, this can be updated.
+    player.on('timeupdate', vjs.bind(this, this.updateContent)); // this might need to be changes to 'durationchange' instead of 'timeupdate' eventually, however the durationchange event fires before this.player_.duration() is set, so the value cannot be written out using this method. Once the orders of durationchange and this.player_.duration() being set is figured out, this can be updated.
   }
 });
 
@@ -4912,7 +4912,7 @@ vjs.MediaTechController = vjs.Component.extend({
  * a few seconds of inactivity.
  *
  * Note: the only part of iOS interaction we can't mimic with this setup
- * is a touch and hold on the video element counting as activity in order to
+ * is a touch and hold on the video element counting as activity in orders to
  * keep the controls showing, but that shouldn't be an issue. A touch and hold on
  * any controls will still keep the user active
  */
@@ -6536,7 +6536,7 @@ vjs.TextTrack.prototype.update = function(){
         } else {
 
           if (reverse) {
-            // Add cue to front of array to keep in time order
+            // Add cue to front of array to keep in time orders
             newCues.splice(0,0,cue);
 
             // If in reverse, the first current cue is our lastActiveCue

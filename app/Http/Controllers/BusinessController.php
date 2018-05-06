@@ -8,6 +8,7 @@ use App\Information;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -19,11 +20,13 @@ class BusinessController extends Controller
             'except' => [ 'create', 'store']
         ]);
     }
+
     public function index()
     {
        $businesses =  Business::paginate(3);
         return view('businesses.index',compact('businesses'));
     }
+
     public function create()
     {
         $categories = Category::all();
@@ -132,10 +135,21 @@ class BusinessController extends Controller
 
     public function review(Business $business)
     {
+//        dd($business->name);
 //        $review = 1;
         $business->update([
             'is_review'=>$business->is_review =1,
         ]);
+        $email = $business->email;
+        $business_name = $business->name;
+       Mail::send(
+            'businesses.mail',//邮件视图模板
+            ['name'=>$business_name],
+            function ($message)use($email){
+                $message->to($email)->subject('审核通知');
+            }
+        );
+//        return '邮件发送成功';
         session()->flash('success','审核通过');
         return redirect()->route('businesses.index');
         }

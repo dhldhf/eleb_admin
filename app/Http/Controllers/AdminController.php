@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -21,13 +22,23 @@ class AdminController extends Controller
     }
     public function index()
     {
+//        $a = Auth::user()->name;
+//        $a = Auth::user()->can('admins.create');
+//        dd($a);
+        if (!Auth::user()->can('admins.index')){
+            return '你没有该权限';
+        }
        $admins =  Admin::paginate(3);
         return view('admins.index',compact('admins'));
     }
 
     public function create()
     {
-        return view('admins.create');
+        if (!Auth::user()->can('admins.create')){
+            return '你没有该权限';
+        }
+        $roles = DB::table('roles')->get();
+        return view('admins.create',compact('roles'));
     }
 
     public function store(Request $request)
@@ -58,7 +69,12 @@ class AdminController extends Controller
 
     public function edit(Admin $admin)
     {
-        return view('admins.edit',compact('admin'));
+        if (!Auth::user()->can('admins.edit')){
+            return '你没有该权限';
+        }
+        $roles = DB::table('roles')->get();
+//        dd($roles);
+        return view('admins.edit',compact('admin','roles'));
     }
 
     public function update(Request $request,Admin $admin)
@@ -88,12 +104,17 @@ class AdminController extends Controller
             'password'=>bcrypt($request->password),
             'email'=>$request->email,
         ]);
+//        dd($request->roles);
+        $admin->syncRolesWithoutDetaching($request->roles);
         session()->flash('success','修改成功');
         return redirect()->route('admins.index');
     }
 
     public function destroy(Admin $admin)
     {
+        if (!Auth::user()->can('admins.destroy')){
+            return '你没有该权限';
+        }
         $admin->delete();
     }
 

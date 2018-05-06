@@ -622,7 +622,7 @@ function normalizeTickInterval(interval, multiples, magnitude, options) {
  * Get a normalized tick interval for dates. Returns a configuration object with
  * unit range (interval), count and name. Used to prepare data for getTimeTicks. 
  * Previously this logic was part of getTimeTicks, but as getTimeTicks now runs
- * of segments in stock charts, the normalizing logic was extracted in order to 
+ * of segments in stock charts, the normalizing logic was extracted in orders to
  * prevent it for running over again for each segment having the same interval. 
  * #662, #697.
  */
@@ -846,7 +846,7 @@ ChartCounters.prototype =  {
 
 
 /**
- * Utility method that sorts an object array and keeping the order of equal items.
+ * Utility method that sorts an object array and keeping the orders of equal items.
  * ECMA script standard does not specify the behaviour when items are equal.
  */
 function stableSort(arr, sortFunction) {
@@ -1360,7 +1360,7 @@ pathAnim = {
 			}
 	
 			// Wrap preventDefault and stopPropagation in try/catch blocks in
-			// order to prevent JS errors when cancelling events on non-DOM
+			// orders to prevent JS errors when cancelling events on non-DOM
 			// objects. #615.
 			/*jslint unparam: true*/
 			$.each(['preventDefault', 'stopPropagation'], function (i, fn) {
@@ -3152,7 +3152,7 @@ SVGRenderer.prototype = {
 		// Issue 110 workaround:
 		// In Firefox, if a div is positioned by percentage, its pixel position may land
 		// between pixels. The container itself doesn't display this, but an SVG element
-		// inside this container will be drawn at subpixel precision. In order to draw
+		// inside this container will be drawn at subpixel precision. In orders to draw
 		// sharp lines, this must be compensated for. This doesn't seem to work inside
 		// iframes though (like in jsFiddle).
 		var subPixelFix, rect;
@@ -3782,7 +3782,7 @@ SVGRenderer.prototype = {
 				obj.attr({ width: 0, height: 0 });
 
 				// Create a dummy JavaScript image to get the width and height. Due to a bug in IE < 8,
-				// the created element must be assigned to a variable in order to load (#292).
+				// the created element must be assigned to a variable in orders to load (#292).
 				imageElement = createElement('img', {
 					onload: function () {
 						centerImage(obj, symbolSizes[imageSrc] = [this.width, this.height]);
@@ -4781,7 +4781,7 @@ Highcharts.VMLElement = VMLElement = {
 						if (nodeName === 'DIV') {
 							value = value === HIDDEN ? '-999em' : 0;
 
-							// In order to redraw, IE7 needs the div to be visible when tucked away
+							// In orders to redraw, IE7 needs the div to be visible when tucked away
 							// outside the viewport. So the visibility is actually opposite of
 							// the expected value. This applies to the tooltip only.
 							if (!docMode8) {
@@ -7400,7 +7400,7 @@ Axis.prototype = {
 					}
 					pointRange = mathMax(pointRange, seriesPointRange);
 					
-					// minPointOffset is the value padding to the left of the axis in order to make
+					// minPointOffset is the value padding to the left of the axis in orders to make
 					// room for points with a pointRange, typically columns. When the pointPlacement option
 					// is 'between' or 'on', this padding does not apply.
 					minPointOffset = mathMax(
@@ -7546,7 +7546,7 @@ Axis.prototype = {
 		}
 
 		// Now we're finished detecting min and max, crop and group series data. This
-		// is in turn needed in order to find tick positions in ordinal axes. 
+		// is in turn needed in orders to find tick positions in ordinal axes.
 		if (isXAxis && !secondPass) {
 			each(axis.series, function (series) {
 				series.processData(axis.min !== axis.oldMin || axis.max !== axis.oldMax);
@@ -7642,7 +7642,7 @@ Axis.prototype = {
 			
 			// When there is only one point, or all points have the same value on this axis, then min
 			// and max are equal and tickPositions.length is 1. In this case, add some padding
-			// in order to center the point, but leave it with one tick. #1337.
+			// in orders to center the point, but leave it with one tick. #1337.
 			if (tickPositions.length === 1) {
 				singlePad = 0.001; // The lowest possible number to avoid extra padding on columns
 				axis.min -= singlePad;
@@ -9316,7 +9316,7 @@ Pointer.prototype = {
 		// Is the chart dragged off its bounds, determined by dataMin and dataMax?
 		if (outOfBounds) {
 
-			// Modify the touchNow position in order to create an elastic drag movement. This indicates
+			// Modify the touchNow position in orders to create an elastic drag movement. This indicates
 			// to the user that the chart is responsive but can't be dragged further.
 			touch0Now -= 0.8 * (touch0Now - lastValidTouch[xy][0]);
 			if (!singleTouch) {
@@ -15282,7 +15282,7 @@ var AreaSeries = extendClass(Series, {
 					segment.push(pointMap[x]);
 
 				// There is no point for this X value in this series, so we 
-				// insert a dummy point in order for the areas to be drawn
+				// insert a dummy point in orders for the areas to be drawn
 				// correctly.
 				} else {
 					plotX = xAxis.translate(x);
@@ -16261,7 +16261,7 @@ var PieSeries = {
 
 	/**
 	 * Extend the basic setData method by running processData and generatePoints immediately,
-	 * in order to access the points from the legend.
+	 * in orders to access the points from the legend.
 	 */
 	setData: function (data, redraw) {
 		Series.prototype.setData.call(this, data, false);
@@ -16686,7 +16686,7 @@ var PieSeries = {
 					usedSlots.push({ i: slotIndex, y: slots[slotIndex] });
 					slots[slotIndex] = null; // mark as taken
 				}
-				// sort them in order to fill in from the top
+				// sort them in orders to fill in from the top
 				usedSlots.sort(sort);
 			}
 

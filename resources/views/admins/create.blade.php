@@ -6,6 +6,15 @@
             <label for="">管理员名称</label>
             <input type="text" class="form-control" id="管理员名称" placeholder="管理员名称" name="name" value="{{old('name')}}">
         </div>
+        <div class="checkbox">
+            <label for="">选择角色</label>
+            <br/>
+            <label for="">
+                @foreach($roles as $role)
+                    <input type="checkbox" name="roles[]" value="{{ $role->id }}">{{ $role->description }}&emsp;&emsp;
+                @endforeach
+            </label>
+        </div>
         <div class="form-group">
             <label for="">密码</label>
             <input type="password" class="form-control" id="密码" placeholder="密码" name="password" value="{{old('password')}}">

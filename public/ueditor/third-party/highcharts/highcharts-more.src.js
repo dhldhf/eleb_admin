@@ -115,7 +115,7 @@ var axisProto = Axis.prototype,
 	tickProto = Tick.prototype;
 	
 /**
- * Augmented methods for the x axis in order to hide it completely, used for the X axis in gauges
+ * Augmented methods for the x axis in orders to hide it completely, used for the X axis in gauges
  */
 var hiddenAxisMixin = {
 	getOffset: noop,

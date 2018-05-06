@@ -525,7 +525,7 @@ if (XRegExp) {
         isInsideConstructor = true;
         // Must reset `isInsideConstructor`, even if a `trigger` or `handler` throws
         try {
-            while (i--) { // Run in reverse order
+            while (i--) { // Run in reverse orders
                 t = tokens[i];
                 if ((scope & t.scope) && (!t.trigger || t.trigger.call(context))) {
                     t.pattern.lastIndex = index;
@@ -674,7 +674,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
     }
 
 // Shortcut object which will be assigned to the SyntaxHighlighter variable.
-// This is a shorthand for local reference in order to avoid long namespace
+// This is a shorthand for local reference in orders to avoid long namespace
 // references to SyntaxHighlighter.whatever...
     var sh = {
         defaults : {
@@ -3531,7 +3531,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'group grouping having hour ignore index inner insensitive insert instead ' +
 						'int integer intersect into is isolation key last level load local max min ' +
 						'minute modify move name national nchar next no numeric of off on only ' +
-						'open option order out output partial password precision prepare primary ' +
+						'open option orders out output partial password precision prepare primary ' +
 						'prior privileges procedure public read real references relative repeatable ' +
 						'restrict return returns revoke rollback rollup rows rule schema scroll ' +
 						'second section select sequence serializable set size smallint static ' +

@@ -10,8 +10,8 @@
             <label for="">所属分类</label>
             <select name="categories_id" id="">
                 @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">
@@ -44,15 +44,15 @@
         </div>
         <div class="form-group">
             {{--<label>--}}
-                <input type="checkbox" name="brand" value="1">是否品牌&emsp;&emsp;
-                <input type="checkbox" name="on_time" value="1">是否加入准时达&emsp;&emsp;
-                <input type="checkbox" name="bao" value="1">是否保险&emsp;&emsp;
-                <input type="checkbox" name="piao" value="1">是否有发票&emsp;&emsp;
-                <input type="checkbox" name="zhun" value="1">是否准时&emsp;&emsp;<br>
-                <input type="checkbox" name="fengniao" value="1">是否蜂鸟专送&emsp;&emsp;
+            <input type="checkbox" name="brand" value="1">是否品牌&emsp;&emsp;
+            <input type="checkbox" name="on_time" value="1">是否加入准时达&emsp;&emsp;
+            <input type="checkbox" name="bao" value="1">是否保险&emsp;&emsp;
+            <input type="checkbox" name="piao" value="1">是否有发票&emsp;&emsp;
+            <input type="checkbox" name="zhun" value="1">是否准时&emsp;&emsp;<br>
+            <input type="checkbox" name="fengniao" value="1">是否蜂鸟专送&emsp;&emsp;
             {{--</label>--}}
         </div>
         {{csrf_field()}}
         <button type="submit" class="btn btn-primary btn-block">提交</button>
     </form>
-    @stop
+@stop

@@ -14,21 +14,20 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="">帮助<span class="sr-only">(current)</span></a></li>
-                <li><a href="">首页</a></li>
+                @foreach(\App\Http\Controllers\MenuController::all() as $row)
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">总列表 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $row->name }} <span class="caret"></span></a>
+
                     <ul class="dropdown-menu">
-                        <li><a href="">管理员页</a></li>
-                        <li><a href="">文章页</a></li>
-                        <li><a href="">商品页</a></li>
-                        <li><a href="">消费充值记录页</a></li>
-                        <li><a href="">会员列表</a></li>
-                        <li><a href="">套餐列表</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="">商品分类</a></li>
+                        @foreach($row->vul as $la)
+                            @if(\Illuminate\Support\Facades\Auth::user()->can($la->address))
+                            <li><a href="{{ route($la->address) }}">{{ $la->name }}</a></li>
+                            @endif
+                        @endforeach
                     </ul>
+
                 </li>
+                    @endforeach
             </ul>
             <form class="navbar-form navbar-left" method="get" action="">
                 <div class="form-group">
