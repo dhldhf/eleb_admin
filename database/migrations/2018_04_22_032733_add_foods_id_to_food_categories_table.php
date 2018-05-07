@@ -16,7 +16,7 @@ class AddFoodsIdToFoodCategoriesTable extends Migration
         Schema::table('food_categories', function (Blueprint $table) {
             $table->integer('foods_id')->unsigned();
 
-            $table->foreign('foods_id')->references('food_id')->on('foods');
+            $table->foreign('foods_id')->references('id')->on('foods');
         });
     }
 
