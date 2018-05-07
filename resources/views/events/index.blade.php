@@ -23,8 +23,11 @@
                 <td>{{$event->is_prize==0?'未开奖':'已开奖'}}</td>
                 <td>
                     <a href="{{ route('events.edit',['event'=>$event]) }}" class="btn btn-warning">编辑</a>
-                    <a href="{{ route('events.show',['event'=>$event]) }}" class="btn btn-warning">查看活动及奖品</a>
-                    <a href="{{ route('lottery',['event'=>$event]) }}" class="btn btn-warning">开始抽奖</a>
+                    <a href="{{ route('events.show',['event'=>$event]) }}" class="btn btn-primary">查看活动及奖品</a>
+                    <a href="{{ route('winning',['event'=>$event]) }}" class="btn btn-primary">查看活动中奖详情</a>
+                    @if($event->is_prize==0)
+                        <a href="{{ route('lottery',['event'=>$event]) }}" class="btn btn-success">开始抽奖</a>
+                @endif
                     <button class="btn btn-danger">删除</button>
                 </td>
             </tr>

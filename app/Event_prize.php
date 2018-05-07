@@ -13,4 +13,8 @@ class Event_prize extends Model
     {
         return $this->belongsTo(Events::class,'events_id');
     }
+    public function businesses()
+    {
+        return $this->belongsTo(Business::class,'member_id');
+    }
 }

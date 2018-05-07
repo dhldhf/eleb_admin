@@ -55,6 +55,10 @@ Route::resource('event_prize', 'EventPrizeController');
 Route::resource('event_members', 'Event_memberController');
 
 Route::get('events/{event}/lottery','EventsController@lottery')->name('lottery');
+
+Route::get('events/{event}/winning','EventsController@winning')->name('winning');
+
+
 //Route::get('/mail',function(){
 //    \Illuminate\Support\Facades\Mail::send(
 //        'mail',//邮件视图模板

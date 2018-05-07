@@ -1,3 +1,6 @@
+@extends('layout.default')
+@section('title','活动奖品列表')
+@section('content')
 <div>活动标题: {{$event->title}}</div>
 <div>活动详情: {{$event->content}}</div>
 <div>开始报名时间: {{$event->signup_start}}</div>
@@ -9,3 +12,4 @@
     <div>奖品名称: {{ $event_prize->name }}</div>
     <div>奖品描述: {{ $event_prize->description }}</div>
     @endforeach
+@stop
