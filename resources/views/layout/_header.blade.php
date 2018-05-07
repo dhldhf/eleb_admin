@@ -20,9 +20,9 @@
 
                     <ul class="dropdown-menu">
                         @foreach($row->vul as $la)
-                            @if(\Illuminate\Support\Facades\Auth::user()->can($la->address))
+                            {{--@if(\Illuminate\Support\Facades\Auth::user()->can($la->address))--}}
                             <li><a href="{{ route($la->address) }}">{{ $la->name }}</a></li>
-                            @endif
+                            {{--@endif--}}
                         @endforeach
                     </ul>
 
