@@ -9,7 +9,7 @@ class InformationController extends Controller
     public function __construct()
     {
         $this->middleware('auth', [
-            'except' => [ 'create', 'store']
+            'except' => []
         ]);
 
 //        $this->middleware('guest', [

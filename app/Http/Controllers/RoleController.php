@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => []
+        ]);
+    }
+
     //角色列表
     public function index()
     {

@@ -13,6 +13,7 @@ class SessionsController extends Controller
             'only' => ['create']
         ]);
     }
+
     public function create()
     {
         if (Auth::user()){
@@ -20,6 +21,7 @@ class SessionsController extends Controller
         }
         return view('sessions.create');
     }
+
     public function store(Request $request)
     {
 //        var_dump($request->name);die;
@@ -43,6 +45,7 @@ class SessionsController extends Controller
             return redirect()->back();
         }
     }
+
     public function destroy()
     {
         Auth::logout();

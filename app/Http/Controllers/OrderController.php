@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => []
+        ]);
+    }
+
     public function today(Request $request)
     {
         echo '平台订单量统计<br>';

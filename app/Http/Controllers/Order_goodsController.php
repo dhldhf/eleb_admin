@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class Order_goodsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => []
+        ]);
+    }
+
     public function food_today()
     {
 

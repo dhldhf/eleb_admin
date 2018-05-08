@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class Event_memberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => []
+        ]);
+    }
+
     public function index()
     {
         $event_members = Event_member::paginate(5);

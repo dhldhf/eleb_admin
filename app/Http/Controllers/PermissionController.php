@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class PermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => []
+        ]);
+    }
+
     public function index()
     {
         $permissions = Permission::paginate(5);

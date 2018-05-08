@@ -15,11 +15,8 @@ class AdminController extends Controller
         $this->middleware('auth', [
             'except' => [ 'create', 'store']
         ]);
-
-//        $this->middleware('guest', [
-////            'only' => ['create']
-//        ]);
     }
+
     public function index()
     {
 //        $a = Auth::user()->name;
@@ -34,9 +31,6 @@ class AdminController extends Controller
 
     public function create()
     {
-        if (!Auth::user()->can('admins.create')){
-            return '你没有该权限';
-        }
         $roles = DB::table('roles')->get();
         return view('admins.create',compact('roles'));
     }

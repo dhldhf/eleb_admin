@@ -9,6 +9,12 @@ use phpDocumentor\Reflection\Element;
 
 class EventPrizeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => []
+        ]);
+    }
 
     public function index()
     {

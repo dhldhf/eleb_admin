@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => []
+        ]);
+    }
 
     public function index($parent_id=0){
         $categoryList = Menu::all();
