@@ -8,7 +8,7 @@ class Business extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'name', 'logo','phone','password','categories_id','information_id','is_review',
+        'name', 'logo','phone','password','categories_id','information_id','is_review','email',
     ];
     public function category()
     {

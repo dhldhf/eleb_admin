@@ -42,6 +42,7 @@ class BusinessController extends Controller
              'password'=>'required|min:3|confirmed',
              'captcha'=>'required|captcha',
             'phone'=>'required|min:11|max:12',
+                'email'=>'required|email',
         ],
             [
             'name.required'=>'商家名称不能为空',
@@ -55,6 +56,8 @@ class BusinessController extends Controller
             'phone.min'=>'电话号码不能小于11位',
             'phone.max'=>'电话号码不能超过12位',
             'phone.required'=>'电话号码不能为空',
+                'email.required'=>'邮箱不能为空',
+                'email.email'=>'邮箱格式不正确',
             ]);
         DB::transaction(function ()use($request){
             $information_id = Information::create(
@@ -66,27 +69,93 @@ class BusinessController extends Controller
                     'zhun'=>$request->zhun,
                     'fengniao'=>$request->fengniao,
                     'piao'=>$request->piao,
+                    'email'=>$request->email,
                 ]);
 //        var_dump($information_id->id);die;
-            $fileName = $request->file('logo')->store('public/businesses');
-            $file = url(Storage::url($fileName));
-            Business::create(
-                [
-                    'name'=>$request->name,
-                    'logo'=>$file,
-                    'phone'=>$request->phone,
-                    'password'=>bcrypt($request->password),
-                    'categories_id'=>$request->categories_id,
-                    'information_id'=>$information_id->id,
-                    'is_review'=>1,
-                ]
-            );
-
+            DB::transaction(function ()use($request){
+                $fileName = $request->file('logo')->store('public/businesses');
+                $file = url(Storage::url($fileName));
+                $information_id = Information::create(
+                    [
+                        'shop_name'=>$request->name,
+                        'brand'=>$request->brand,
+                        'bao'=>$request->bao,
+                        'on_time'=>$request->on_time,
+                        'zhun'=>$request->zhun,
+                        'fengniao'=>$request->fengniao,
+                        'piao'=>$request->piao,
+                        'shop_img'=>$file,
+                    ]);
+                Business::create(
+                    [
+                        'name'=>$request->name,
+                        'logo'=>$file,
+                        'phone'=>$request->phone,
+                        'password'=>bcrypt($request->password),
+                        'categories_id'=>$request->categories_id,
+                        'information_id'=>$information_id->id,
+                        'email'=>$request->email,
+                    ]
+                );
+            });
         });
 
         session()->flash('success','注册成功');
         return redirect()->route('businesses.index');
         }
+
+    public function edit(Business $business)
+    {
+        return view('businesses.edit',compact('business'));
+    }
+
+    public function update(Request $request,Business $business)
+    {
+        $this->validate($request,
+            [
+                'name'=>'required',
+                'logo'=>'required|image',
+                'password'=>'required|min:3|confirmed',
+                'phone'=>'required|min:11|max:12',
+                'email'=>'required|email',
+            ],
+            [
+                'name.required'=>'商家名称不能为空',
+                'logo.required'=>'商家图片不能为空',
+                'logo.image'=>'图片格式不正确',
+                'password.required'=>'密码不能为空',
+                'password.confirmed'=>'密码两次填写不一致',
+                'password.min'=>'密码不能小于三位',
+                'phone.min'=>'电话号码不能小于11位',
+                'phone.max'=>'电话号码不能超过12位',
+                'phone.required'=>'电话号码不能为空',
+                'email.required'=>'邮箱不能为空',
+                'email.email'=>'邮箱格式不正确',
+            ]);
+        $fileName = $request->file('logo')->store('public/businesses');
+        $file = url(Storage::url($fileName));
+        $business->update(
+            [
+                'name'=>$request->name,
+                'logo'=>$file,
+                'phone'=>$request->phone,
+                'password'=>bcrypt($request->password),
+                'email'=>$request->email,
+            ]
+        );
+        DB::table('information')
+            ->where('id', $business->information_id)
+            ->update(['shop_img' => $file]);
+        session()->flash('success','修改成功');
+        return redirect()->route('businesses.index');
+    }
+
+    public function destroy(Business $business)
+    {
+//        dd($business->information_id);
+        $business->delete();
+        DB::table('information')->where('id','=',$business->information_id)->delete();
+    }
 
     public function login()
     {

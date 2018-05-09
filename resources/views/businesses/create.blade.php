@@ -19,6 +19,10 @@
             <input type="number" class="form-control" id="电话号码" placeholder="电话号码" name="phone" value="{{old('phone')}}">
         </div>
         <div class="form-group">
+            <label for="">邮箱</label>
+            <input type="text" class="form-control" id="邮箱" placeholder="邮箱" name="email" value="{{old('email')}}">
+        </div>
+        <div class="form-group">
             <label for="exampleInputPassword1">密码</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="密码" name="password" value="{{old('password')}}">
         </div>

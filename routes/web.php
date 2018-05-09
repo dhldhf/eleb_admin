@@ -37,10 +37,6 @@ Route::resource('activities', 'ActivityController');
 
 Route::get('orders_today','OrderController@today')->name('today');
 
-//Route::get('orders_all','OrderController@order_all')->name('order_all');
-
-//Route::post('orders_jiti', 'OrderController@orders_jiti')->name('orders_jiti');
-
 Route::resource('permissions', 'PermissionController');
 
 Route::resource('roles', 'RoleController');
