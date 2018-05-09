@@ -138,7 +138,6 @@ class BusinessController extends Controller
 
     public function destroy(Business $business)
     {
-//        dd($business->information_id);
         $business->delete();
         DB::table('information')->where('id','=',$business->information_id)->delete();
     }
