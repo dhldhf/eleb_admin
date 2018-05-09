@@ -59,19 +59,7 @@ class BusinessController extends Controller
                 'email.required'=>'邮箱不能为空',
                 'email.email'=>'邮箱格式不正确',
             ]);
-        DB::transaction(function ()use($request){
-            $information_id = Information::create(
-                [
-                    'shop_name'=>$request->name,
-                    'brand'=>$request->brand,
-                    'bao'=>$request->bao,
-                    'on_time'=>$request->on_time,
-                    'zhun'=>$request->zhun,
-                    'fengniao'=>$request->fengniao,
-                    'piao'=>$request->piao,
-                    'email'=>$request->email,
-                ]);
-//        var_dump($information_id->id);die;
+
             DB::transaction(function ()use($request){
                 $fileName = $request->file('logo')->store('public/businesses');
                 $file = url(Storage::url($fileName));
@@ -98,8 +86,6 @@ class BusinessController extends Controller
                     ]
                 );
             });
-        });
-
         session()->flash('success','注册成功');
         return redirect()->route('businesses.index');
         }
